@@ -220,7 +220,7 @@ SPOTIFY_ARTIST_IMG_URL = getenv(
 
 SPOTIFY_ALBUM_IMG_URL = getenv(
     "SPOTIFY_ALBUM_IMG_URL",
-    "https://te.legra.ph/file/ecdeac045f4045c198bd6.jpg",
+    "https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
 )
 
 SPOTIFY_PLAYLIST_IMG_URL = getenv(
