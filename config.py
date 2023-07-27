@@ -166,56 +166,56 @@ autoclean = []
 
 
 # Images
-START_IMG_URL = getenv("START_IMG_URL", "https://graph.org/file/9036e094a3440e77a545f.jpg")
+START_IMG_URL = getenv("START_IMG_URL", "https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg")
 
 PING_IMG_URL = getenv(
     "PING_IMG_URL",
-    "https://graph.org/file/9036e094a3440e77a545f.jpg",
+    "https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
 )
 
 PLAYLIST_IMG_URL = getenv(
     "PLAYLIST_IMG_URL",
-    "https://graph.org/file/9036e094a3440e77a545f.jpg",
+    "https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
 )
 
 GLOBAL_IMG_URL = getenv(
     "GLOBAL_IMG_URL",
-    "https://graph.org/file/9036e094a3440e77a545f.jpg",
+    "https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
 )
 
 STATS_IMG_URL = getenv(
     "STATS_IMG_URL",
-    "https://graph.org/file/9036e094a3440e77a545f.jpg",
+    "https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
 )
 
 TELEGRAM_AUDIO_URL = getenv(
     "TELEGRAM_AUDIO_URL",
-    "https://graph.org/file/9036e094a3440e77a545f.jpg",
+    "https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
 )
 
 TELEGRAM_VIDEO_URL = getenv(
     "TELEGRAM_VIDEO_URL",
-    "https://graph.org/file/9036e094a3440e77a545f.jpg",
+    "https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
 )
 
 STREAM_IMG_URL = getenv(
     "STREAM_IMG_URL",
-    "https://graph.org/file/9036e094a3440e77a545f.jpg",
+    "https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
 )
 
 SOUNCLOUD_IMG_URL = getenv(
     "SOUNCLOUD_IMG_URL",
-    "https://graph.org/file/9036e094a3440e77a545f.jpg",
+    "https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
 )
 
 YOUTUBE_IMG_URL = getenv(
     "YOUTUBE_IMG_URL",
-    "https://graph.org/file/9036e094a3440e77a545f.jpg",
+    "https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
 )
 
 SPOTIFY_ARTIST_IMG_URL = getenv(
     "SPOTIFY_ARTIST_IMG_URL",
-    "https://graph.org/file/9036e094a3440e77a545f.jpg",
+    "https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
 )
 
 SPOTIFY_ALBUM_IMG_URL = getenv(
@@ -225,7 +225,7 @@ SPOTIFY_ALBUM_IMG_URL = getenv(
 
 SPOTIFY_PLAYLIST_IMG_URL = getenv(
     "SPOTIFY_PLAYLIST_IMG_URL",
-    "https://graph.org/file/9036e094a3440e77a545f.jpg",
+    "https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
 )
 
 
@@ -353,4 +353,4 @@ if not MUSIC_BOT_NAME.isascii():
     print(
         "[ERROR] - You've defined MUSIC_BOT_NAME wrong. Please don't use any special characters or Special font for this... Keep it simple and small."
     )
-    sys.exit()
+    sys.exit()  
