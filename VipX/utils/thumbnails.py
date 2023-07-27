@@ -1,18 +1,17 @@
 import os
 import re
 import textwrap
-
+import random
 import aiofiles
 import aiohttp
 import numpy as np
-import random
 
-from PIL import Image, ImageChops, ImageOps, ImageDraw, ImageEnhance, ImageFilter, ImageFont
+from PIL import Image, ImageChops, ImageDraw, ImageEnhance, ImageFilter, ImageFont
 from youtubesearchpython.__future__ import VideosSearch
 
-from SankiMusic import bot
-from SankiMusic.resource import thumbs, colors
-from SankiMusic.utilities.config import YOUTUBE_IMG_URL
+import config
+from VipX import app YOUTUBE_IMG_URL
+
 
 
 
@@ -69,11 +68,11 @@ async def gen_thumb(videoid, user_id):
                     await f.close()
 
         try:
-            wxyz = await bot.get_profile_photos(user_id)
-            wxy = await bot.download_media(wxyz[0]['file_id'], file_name=f'{user_id}.jpg')
+            wxyz = await app.get_profile_photos(user_id)
+            wxy = await app.download_media(wxyz[0]['file_id'], file_name=f'{user_id}.jpg')
         except:
-            abc = await bot.get_profile_photos(bot.id)
-            wxy = await bot.download_media(abc[0]['file_id'], file_name=f'{bot.id}.jpg')
+            hehe = await app.get_profile_photos(app.id)
+            wxy = await app.download_media(hehe[0]['file_id'], file_name=f'{app.id}.jpg')
         xy = Image.open(wxy)
         a = Image.new('L', [640, 640], 0)
         b = ImageDraw.Draw(a)
@@ -84,10 +83,8 @@ async def gen_thumb(videoid, user_id):
         f = Image.fromarray(e)
         x = f.resize((107, 107))
 
-        images = random.choice(thumbs)
-        border = random.choice(colors)
         youtube = Image.open(f"cache/thumb{videoid}.png")
-        bg = Image.open(f"SankiMusic/resource/{images}.png")
+        bg = Image.open(f"VipX/assets/vipx.png")
         image1 = changeImageSize(1280, 720, youtube)
         image2 = image1.convert("RGBA")
         background = image2.filter(filter=ImageFilter.BoxBlur(30))
@@ -120,26 +117,26 @@ async def gen_thumb(videoid, user_id):
         background.paste(logo, (width + 2, 138), mask=logo)
         background.paste(x, (710, 427), mask=x)
         background.paste(image3, (0, 0), mask=image3)
-        img = ImageOps.expand(background, border=10, fill=f"{border}")
-        draw = ImageDraw.Draw(img)
-        font = ImageFont.truetype("SankiMusic/resource/font2.ttf", 45)
-        ImageFont.truetype("SankiMusic/resource/font2.ttf", 70)
-        arial = ImageFont.truetype("SankiMusic/resource/font2.ttf", 30)
-        ImageFont.truetype("SankiMusic/resource/font.ttf", 30)
+
+        draw = ImageDraw.Draw(background)
+        font = ImageFont.truetype("VipX/assets/font2.ttf", 45)
+        ImageFont.truetype("VipX/assets/font2.ttf", 70)
+        arial = ImageFont.truetype("VipX/assets/font2.ttf", 30)
+        ImageFont.truetype("VipX/assets/font.ttf", 30)
         para = textwrap.wrap(title, width=32)
         try:
             draw.text(
-                (450, 35),
+                (450, 25),
                 f"STARTED PLAYING",
                 fill="white",
-                stroke_width=1,
-                stroke_fill="white",
+                stroke_width=3,
+                stroke_fill="grey",
                 font=font,
             )
             if para[0]:
                 text_w, text_h = draw.textsize(f"{para[0]}", font=font)
                 draw.text(
-                    ((1280 - text_w) / 2, 560),
+                    ((1280 - text_w) / 2, 530),
                     f"{para[0]}",
                     fill="white",
                     stroke_width=1,
@@ -149,7 +146,7 @@ async def gen_thumb(videoid, user_id):
             if para[1]:
                 text_w, text_h = draw.textsize(f"{para[1]}", font=font)
                 draw.text(
-                    ((1280 - text_w) / 2, 610),
+                    ((1280 - text_w) / 2, 580),
                     f"{para[1]}",
                     fill="white",
                     stroke_width=1,
@@ -160,7 +157,7 @@ async def gen_thumb(videoid, user_id):
             pass
         text_w, text_h = draw.textsize(f"Duration: {duration} Mins", font=arial)
         draw.text(
-            ((1280 - text_w) / 2, 665),
+            ((1280 - text_w) / 2, 660),
             f"Duration: {duration} Mins",
             fill="white",
             font=arial,
@@ -169,14 +166,14 @@ async def gen_thumb(videoid, user_id):
             os.remove(f"cache/thumb{videoid}.png")
         except:
             pass
-        img.save(f"cache/{videoid}_{user_id}.png")
+        background.save(f"cache/{videoid}_{user_id}.png")
         return f"cache/{videoid}_{user_id}.png"
     except Exception as e:
         print(e)
-        return YOUTUBE_IMG_URL
+        return random.choice(YOUTUBE_IMG_URL)
 
 
-async def que_thumb(videoid, user_id):
+async def gen_qthumb(videoid, user_id):
     if os.path.isfile(f"cache/que{videoid}_{user_id}.png"):
         return f"cache/que{videoid}_{user_id}.png"
     url = f"https://www.youtube.com/watch?v={videoid}"
@@ -211,11 +208,11 @@ async def que_thumb(videoid, user_id):
                     await f.close()
 
         try:
-            wxyz = await bot.get_profile_photos(user_id)
-            wxy = await bot.download_media(wxyz[0]['file_id'], file_name=f'{user_id}.jpg')
+            wxyz = await app.get_profile_photos(user_id)
+            wxy = await app.download_media(wxyz[0]['file_id'], file_name=f'{user_id}.jpg')
         except:
-            abc = await bot.get_profile_photos(bot.id)
-            wxy = await bot.download_media(abc[0]['file_id'], file_name=f'{bot.id}.jpg')
+            hehe = await app.get_profile_photos(app.id)
+            wxy = await app.download_media(hehe[0]['file_id'], file_name=f'{app.id}.jpg')
         xy = Image.open(wxy)
         a = Image.new('L', [640, 640], 0)
         b = ImageDraw.Draw(a)
@@ -226,10 +223,8 @@ async def que_thumb(videoid, user_id):
         f = Image.fromarray(e)
         x = f.resize((107, 107))
 
-        images = random.choice(thumbs)
-        border = random.choice(colors)
         youtube = Image.open(f"cache/thumb{videoid}.png")
-        bg = Image.open(f"SankiMusic/resource/{images}.png")
+        bg = Image.open(f"VipX/assets/vipx.png")
         image1 = changeImageSize(1280, 720, youtube)
         image2 = image1.convert("RGBA")
         background = image2.filter(filter=ImageFilter.BoxBlur(30))
@@ -262,26 +257,26 @@ async def que_thumb(videoid, user_id):
         background.paste(logo, (width + 2, 138), mask=logo)
         background.paste(x, (710, 427), mask=x)
         background.paste(image3, (0, 0), mask=image3)
-        img = ImageOps.expand(background, border=10, fill=f"{border}")
-        draw = ImageDraw.Draw(img)
-        font = ImageFont.truetype("SankiMusic/resource/font2.ttf", 45)
-        ImageFont.truetype("SankiMusic/resource/font2.ttf", 70)
-        arial = ImageFont.truetype("SankiMusic/resource/font2.ttf", 30)
-        ImageFont.truetype("SankiMusic/resource/font.ttf", 30)
+
+        draw = ImageDraw.Draw(background)
+        font = ImageFont.truetype("VipX/assets/font2.ttf", 45)
+        ImageFont.truetype("VipX/assets/font2.ttf", 70)
+        arial = ImageFont.truetype("VipX/assets/font2.ttf", 30)
+        ImageFont.truetype("VipX/assets/font.ttf", 30)
         para = textwrap.wrap(title, width=32)
         try:
             draw.text(
-                (455, 35),
+                (455, 25),
                 "ADDED TO QUEUE",
                 fill="white",
-                stroke_width=1,
-                stroke_fill="white",
+                stroke_width=5,
+                stroke_fill="black",
                 font=font,
             )
             if para[0]:
                 text_w, text_h = draw.textsize(f"{para[0]}", font=font)
                 draw.text(
-                    ((1280 - text_w) / 2, 560),
+                    ((1280 - text_w) / 2, 530),
                     f"{para[0]}",
                     fill="white",
                     stroke_width=1,
@@ -291,7 +286,7 @@ async def que_thumb(videoid, user_id):
             if para[1]:
                 text_w, text_h = draw.textsize(f"{para[1]}", font=font)
                 draw.text(
-                    ((1280 - text_w) / 2, 610),
+                    ((1280 - text_w) / 2, 580),
                     f"{para[1]}",
                     fill="white",
                     stroke_width=1,
@@ -302,7 +297,7 @@ async def que_thumb(videoid, user_id):
             pass
         text_w, text_h = draw.textsize(f"Duration: {duration} Mins", font=arial)
         draw.text(
-            ((1280 - text_w) / 2, 665),
+            ((1280 - text_w) / 2, 660),
             f"Duration: {duration} Mins",
             fill="white",
             font=arial,
@@ -313,8 +308,8 @@ async def que_thumb(videoid, user_id):
         except:
             pass
         file = f"cache/que{videoid}_{user_id}.png"
-        img.save(f"cache/que{videoid}_{user_id}.png")
+        background.save(f"cache/que{videoid}_{user_id}.png")
         return f"cache/que{videoid}_{user_id}.png"
     except Exception as e:
         print(e)
-        return YOUTUBE_IMG_URL
+        return random.choice(YOUTUBE_IMG_URL)
