@@ -11,6 +11,47 @@ from youtubesearchpython.__future__ import VideosSearch
 
 import config
 from VipX import app
+YOUTUBE_IMG_URL = [ 
+
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
+    
+    ]
+
 
 def changeImageSize(maxWidth, maxHeight, image):
     widthRatio = maxWidth / image.size[0]
