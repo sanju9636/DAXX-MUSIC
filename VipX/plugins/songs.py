@@ -199,7 +199,7 @@ async def song_helper_cb(client, CallbackQuery, _):
 @languageCB
 async def song_download_cb(client, CallbackQuery, _):
     try:
-        await CallbackQuery.answer("ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ...")
+        await CallbackQuery.answer("ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ......")
     except:
         pass
     callback_data = CallbackQuery.data.strip()
