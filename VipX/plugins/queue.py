@@ -97,7 +97,7 @@ async def ping_com(client, message: Message, _):
 
 📌**𝐓𝐈𝐓𝐋𝐄:** {title}
 
-🍒**𝐓𝐘𝐏𝐄:** {typo}
+❤️‍🔥**𝐓𝐘𝐏𝐄:** {typo}
 💖**𝐏𝐋𝐀𝐘𝐄𝐃 𝐁𝐘:** {user}
 {send}"""
     upl = (
