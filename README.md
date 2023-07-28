@@ -23,7 +23,7 @@
   <img src="https://graph.org/file/058767efac2ec6943fae4.jpg">
 </p>
 
-**𝙏𝙀𝙎𝙏 𝘽𝙊𝙏 ➣ [𝄟🌷𝗕𝗢𝗧❥𝄟⃟🥀](https://t.me/CYBERDAXX)**
+**𝙏𝙀𝙎𝙏 𝘽𝙊𝙏 ➣ [𝗕𝗢𝗧❥](https://t.me/CYBERDAXX)**
 
 
 
@@ -36,7 +36,7 @@
 <h3> 𝗛𝗘𝗥𝗢𝗞𝗨 𝗗𝗘𝗣𝗟𝗢𝗬𝗠𝗘𝗡𝗧 𝗕𝗨𝗧𝗧𝗢𝗡 </h3>
 </h3>
 
-<p align="center"><a href="https://dashboard.heroku.com/new?template=https://github.com/DAXXSIR/DAXX-MUSIC"> <img src="https://img.shields.io/badge/Deploy%20On%20Heroku-bringle?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
+<p align="center"><a href="https://dashboard.heroku.com/new?template=https://github.com/DAXXSIR/DAXX-MUSIC"> <img src="https://graph.org/file/d1018753d9a85f46c2fe4.jpg" width="220" height="38.45"/></a></p>
 
 ## 𝐇𝐨𝐰 𝐓𝐨 𝐃𝐞𝐩𝐥𝐨𝐲 𝐓𝐮𝐭𝐨𝐫𝐢𝐚𝐥 𝐕𝐢𝐝𝐞𝐨 𝐎𝐧 𝐘𝐨𝐮𝐭𝐮𝐛𝐞 📺
 
