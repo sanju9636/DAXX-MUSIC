@@ -1,57 +1,13 @@
 import os
 import re
 import textwrap
-import random
+
 import aiofiles
 import aiohttp
-import numpy as np
-
-from PIL import Image, ImageChops, ImageDraw, ImageEnhance, ImageFilter, ImageFont
+from PIL import (Image, ImageDraw, ImageEnhance, ImageFilter,
+                 ImageFont, ImageOps)
 from youtubesearchpython.__future__ import VideosSearch
-
-import config
-from VipX import app
-YOUTUBE_IMG_URL = [ 
-
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-"https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg",
-    
-    ]
-
+from RaiChu.config import BOT_NAME, YOUTUBE_IMG_URL
 
 def changeImageSize(maxWidth, maxHeight, image):
     widthRatio = maxWidth / image.size[0]
@@ -62,18 +18,7 @@ def changeImageSize(maxWidth, maxHeight, image):
     return newImage
 
 
-def add_corners(im):
-    bigsize = (im.size[0] * 3, im.size[1] * 3)
-    mask = Image.new("L", bigsize, 0)
-    ImageDraw.Draw(mask).ellipse((0, 0) + bigsize, fill=255)
-    mask = mask.resize(im.size, Image.ANTIALIAS)
-    mask = ImageChops.darker(mask, im.split()[-1])
-    im.putalpha(mask)
-
-
-async def gen_thumb(videoid, user_id):
-    if os.path.isfile(f"cache/{videoid}_{user_id}.png"):
-        return f"cache/{videoid}_{user_id}.png"
+async def play_thumb(videoid):   
     url = f"https://www.youtube.com/watch?v={videoid}"
     try:
         results = VideosSearch(url, limit=1)
@@ -87,52 +32,32 @@ async def gen_thumb(videoid, user_id):
             try:
                 duration = result["duration"]
             except:
-                duration = "Unknown"
+                duration = "Unknown Mins"
             thumbnail = result["thumbnails"][0]["url"].split("?")[0]
             try:
-                result["viewCount"]["short"]
+                views = result["viewCount"]["short"]
             except:
-                pass
+                views = "Unknown Views"
             try:
-                result["channel"]["name"]
+                channel = result["channel"]["name"]
             except:
-                pass
+                channel = "Unknown Channel"
 
         async with aiohttp.ClientSession() as session:
             async with session.get(thumbnail) as resp:
                 if resp.status == 200:
-                    f = await aiofiles.open(f"cache/thumb{videoid}.png", mode="wb")
+                    f = await aiofiles.open(
+                        f"play{videoid}.png", mode="wb"
+                    )
                     await f.write(await resp.read())
                     await f.close()
 
-        try:
-            wxyz = await app.get_profile_photos(user_id)
-            wxy = await app.download_media(wxyz[0]['file_id'], file_name=f'{user_id}.jpg')
-        except:
-            hehe = await app.get_profile_photos(app.id)
-            wxy = await app.download_media(hehe[0]['file_id'], file_name=f'{app.id}.jpg')
-        xy = Image.open(wxy)
-        a = Image.new('L', [640, 640], 0)
-        b = ImageDraw.Draw(a)
-        b.pieslice([(0, 0), (640,640)], 0, 360, fill = 255, outline = "white")
-        c = np.array(xy)
-        d = np.array(a)
-        e = np.dstack((c, d))
-        f = Image.fromarray(e)
-        x = f.resize((107, 107))
-
-        youtube = Image.open(f"cache/thumb{videoid}.png")
-        bg = Image.open(f"VipX/assets/vipx.png")
+        youtube = Image.open(f"play{videoid}.png")
         image1 = changeImageSize(1280, 720, youtube)
         image2 = image1.convert("RGBA")
         background = image2.filter(filter=ImageFilter.BoxBlur(30))
         enhancer = ImageEnhance.Brightness(background)
         background = enhancer.enhance(0.6)
-
-        image3 = changeImageSize(1280, 720, bg)
-        image5 = image3.convert("RGBA")
-        Image.alpha_composite(background, image5).save(f"cache/temp{videoid}.png")
-
         Xcenter = youtube.width / 2
         Ycenter = youtube.height / 2
         x1 = Xcenter - 250
@@ -141,79 +66,81 @@ async def gen_thumb(videoid, user_id):
         y2 = Ycenter + 250
         logo = youtube.crop((x1, y1, x2, y2))
         logo.thumbnail((520, 520), Image.ANTIALIAS)
-        logo.save(f"cache/chop{videoid}.png")
-        if not os.path.isfile(f"cache/cropped{videoid}.png"):
-            im = Image.open(f"cache/chop{videoid}.png").convert("RGBA")
-            add_corners(im)
-            im.save(f"cache/cropped{videoid}.png")
-
-        crop_img = Image.open(f"cache/cropped{videoid}.png")
-        logo = crop_img.convert("RGBA")
-        logo.thumbnail((365, 365), Image.ANTIALIAS)
-        width = int((1280 - 365) / 2)
-        background = Image.open(f"cache/temp{videoid}.png")
-        background.paste(logo, (width + 2, 138), mask=logo)
-        background.paste(x, (710, 427), mask=x)
-        background.paste(image3, (0, 0), mask=image3)
-
+        logo = ImageOps.expand(logo, border=15, fill="white")
+        background.paste(logo, (50, 100))
         draw = ImageDraw.Draw(background)
-        font = ImageFont.truetype("VipX/assets/font2.ttf", 45)
-        ImageFont.truetype("VipX/assets/font2.ttf", 70)
-        arial = ImageFont.truetype("VipX/assets/font2.ttf", 30)
-        ImageFont.truetype("VipX/assets/font.ttf", 30)
+        font = ImageFont.truetype("Process/ImageFont/font2.ttf", 40)
+        font2 = ImageFont.truetype("Process/ImageFont/font2.ttf", 70)
+        arial = ImageFont.truetype("Process/ImageFont/font2.ttf", 30)
+        name_font = ImageFont.truetype("Process/ImageFont/font.ttf", 30)
         para = textwrap.wrap(title, width=32)
-        try:
-            draw.text(
-                (450, 25),
-                f"STARTED PLAYING",
-                fill="white",
-                stroke_width=3,
-                stroke_fill="grey",
-                font=font,
-            )
-            if para[0]:
-                text_w, text_h = draw.textsize(f"{para[0]}", font=font)
-                draw.text(
-                    ((1280 - text_w) / 2, 530),
-                    f"{para[0]}",
-                    fill="white",
-                    stroke_width=1,
-                    stroke_fill="white",
-                    font=font,
-                )
-            if para[1]:
-                text_w, text_h = draw.textsize(f"{para[1]}", font=font)
-                draw.text(
-                    ((1280 - text_w) / 2, 580),
-                    f"{para[1]}",
-                    fill="white",
-                    stroke_width=1,
-                    stroke_fill="white",
-                    font=font,
-                )
-        except:
-            pass
-        text_w, text_h = draw.textsize(f"Duration: {duration} Mins", font=arial)
+        j = 0
         draw.text(
-            ((1280 - text_w) / 2, 660),
-            f"Duration: {duration} Mins",
+            (5, 5), f"{BOT_NAME}", fill="white", font=name_font
+        )
+        draw.text(
+            (600, 150),
+            "NOW PLAYING",
             fill="white",
+            stroke_width=2,
+            stroke_fill="white",
+            font=font2,
+        )
+        for line in para:
+            if j == 1:
+                j += 1
+                draw.text(
+                    (600, 340),
+                    f"{line}",
+                    fill="white",
+                    stroke_width=1,
+                    stroke_fill="white",
+                    font=font,
+                )
+            if j == 0:
+                j += 1
+                draw.text(
+                    (600, 280),
+                    f"{line}",
+                    fill="white",
+                    stroke_width=1,
+                    stroke_fill="white",
+                    font=font,
+                )
+        draw.text(
+            (600, 400),
+            f"Bot : {BOT_NAME} ",
+            (255, 255, 255),
+            font=arial,
+        )
+        draw.text(
+            (600, 450),
+            f"Views : {views[:23]}",
+            (255, 255, 255),
+            font=arial,
+        )
+        draw.text(
+            (600, 500),
+            f"Duration : {duration[:23]} Mins",
+            (255, 255, 255),
+            font=arial,
+        )
+        draw.text(
+            (600, 550),
+            f"Channel : {channel}",
+            (255, 255, 255),
             font=arial,
         )
         try:
-            os.remove(f"cache/thumb{videoid}.png")
+            os.remove(f"play{videoid}.png")
         except:
             pass
-        background.save(f"cache/{videoid}_{user_id}.png")
-        return f"cache/{videoid}_{user_id}.png"
-    except Exception as e:
-        print(e)
-        return random.choice(YOUTUBE_IMG_URL)
+        background.save(f"pfinal{videoid}.png")
+        return f"pfinal{videoid}.png"
+    except Exception:
+        return YOUTUBE_IMG_URL
 
-
-async def gen_qthumb(videoid, user_id):
-    if os.path.isfile(f"cache/que{videoid}_{user_id}.png"):
-        return f"cache/que{videoid}_{user_id}.png"
+async def queue_thumb(videoid):   
     url = f"https://www.youtube.com/watch?v={videoid}"
     try:
         results = VideosSearch(url, limit=1)
@@ -227,52 +154,32 @@ async def gen_qthumb(videoid, user_id):
             try:
                 duration = result["duration"]
             except:
-                duration = "Unknown"
+                duration = "Unknown Mins"
             thumbnail = result["thumbnails"][0]["url"].split("?")[0]
             try:
-                result["viewCount"]["short"]
+                views = result["viewCount"]["short"]
             except:
-                pass
+                views = "Unknown Views"
             try:
-                result["channel"]["name"]
+                channel = result["channel"]["name"]
             except:
-                pass
+                channel = "Unknown Channel"
 
         async with aiohttp.ClientSession() as session:
             async with session.get(thumbnail) as resp:
                 if resp.status == 200:
-                    f = await aiofiles.open(f"cache/thumb{videoid}.png", mode="wb")
+                    f = await aiofiles.open(
+                        f"queue{videoid}.png", mode="wb"
+                    )
                     await f.write(await resp.read())
                     await f.close()
 
-        try:
-            wxyz = await app.get_profile_photos(user_id)
-            wxy = await app.download_media(wxyz[0]['file_id'], file_name=f'{user_id}.jpg')
-        except:
-            hehe = await app.get_profile_photos(app.id)
-            wxy = await app.download_media(hehe[0]['file_id'], file_name=f'{app.id}.jpg')
-        xy = Image.open(wxy)
-        a = Image.new('L', [640, 640], 0)
-        b = ImageDraw.Draw(a)
-        b.pieslice([(0, 0), (640,640)], 0, 360, fill = 255, outline = "white")
-        c = np.array(xy)
-        d = np.array(a)
-        e = np.dstack((c, d))
-        f = Image.fromarray(e)
-        x = f.resize((107, 107))
-
-        youtube = Image.open(f"cache/thumb{videoid}.png")
-        bg = Image.open(f"VipX/assets/vipx.png")
+        youtube = Image.open(f"queue{videoid}.png")
         image1 = changeImageSize(1280, 720, youtube)
         image2 = image1.convert("RGBA")
         background = image2.filter(filter=ImageFilter.BoxBlur(30))
         enhancer = ImageEnhance.Brightness(background)
         background = enhancer.enhance(0.6)
-
-        image3 = changeImageSize(1280, 720, bg)
-        image5 = image3.convert("RGBA")
-        Image.alpha_composite(background, image5).save(f"cache/temp{videoid}.png")
-
         Xcenter = youtube.width / 2
         Ycenter = youtube.height / 2
         x1 = Xcenter - 250
@@ -281,73 +188,71 @@ async def gen_qthumb(videoid, user_id):
         y2 = Ycenter + 250
         logo = youtube.crop((x1, y1, x2, y2))
         logo.thumbnail((520, 520), Image.ANTIALIAS)
-        logo.save(f"cache/chop{videoid}.png")
-        if not os.path.isfile(f"cache/cropped{videoid}.png"):
-            im = Image.open(f"cache/chop{videoid}.png").convert("RGBA")
-            add_corners(im)
-            im.save(f"cache/cropped{videoid}.png")
-
-        crop_img = Image.open(f"cache/cropped{videoid}.png")
-        logo = crop_img.convert("RGBA")
-        logo.thumbnail((365, 365), Image.ANTIALIAS)
-        width = int((1280 - 365) / 2)
-        background = Image.open(f"cache/temp{videoid}.png")
-        background.paste(logo, (width + 2, 138), mask=logo)
-        background.paste(x, (710, 427), mask=x)
-        background.paste(image3, (0, 0), mask=image3)
-
+        logo = ImageOps.expand(logo, border=15, fill="white")
+        background.paste(logo, (50, 100))
         draw = ImageDraw.Draw(background)
-        font = ImageFont.truetype("VipX/assets/font2.ttf", 45)
-        ImageFont.truetype("VipX/assets/font2.ttf", 70)
-        arial = ImageFont.truetype("VipX/assets/font2.ttf", 30)
-        ImageFont.truetype("VipX/assets/font.ttf", 30)
+        font = ImageFont.truetype("Process/ImageFont/font2.ttf", 40)
+        font2 = ImageFont.truetype("Process/ImageFont/font2.ttf", 70)
+        arial = ImageFont.truetype("Process/ImageFont/font2.ttf", 30)
+        name_font = ImageFont.truetype("Process/ImageFont/font.ttf", 30)
         para = textwrap.wrap(title, width=32)
-        try:
-            draw.text(
-                (455, 25),
-                "ADDED TO QUEUE",
-                fill="white",
-                stroke_width=5,
-                stroke_fill="black",
-                font=font,
-            )
-            if para[0]:
-                text_w, text_h = draw.textsize(f"{para[0]}", font=font)
-                draw.text(
-                    ((1280 - text_w) / 2, 530),
-                    f"{para[0]}",
-                    fill="white",
-                    stroke_width=1,
-                    stroke_fill="white",
-                    font=font,
-                )
-            if para[1]:
-                text_w, text_h = draw.textsize(f"{para[1]}", font=font)
-                draw.text(
-                    ((1280 - text_w) / 2, 580),
-                    f"{para[1]}",
-                    fill="white",
-                    stroke_width=1,
-                    stroke_fill="white",
-                    font=font,
-                )
-        except:
-            pass
-        text_w, text_h = draw.textsize(f"Duration: {duration} Mins", font=arial)
+        j = 0
         draw.text(
-            ((1280 - text_w) / 2, 660),
-            f"Duration: {duration} Mins",
+            (5, 5), f"{BOT_NAME}", fill="white", font=name_font
+        )
+        draw.text(
+            (600, 150),
+            "IN QUEUE",
             fill="white",
+            stroke_width=2,
+            stroke_fill="white",
+            font=font2,
+        )
+        for line in para:
+            if j == 1:
+                j += 1
+                draw.text(
+                    (600, 340),
+                    f"{line}",
+                    fill="white",
+                    stroke_width=1,
+                    stroke_fill="white",
+                    font=font,
+                )
+            if j == 0:
+                j += 1
+                draw.text(
+                    (600, 280),
+                    f"{line}",
+                    fill="white",
+                    stroke_width=1,
+                    stroke_fill="white",
+                    font=font,
+                )
+
+        draw.text(
+            (600, 450),
+            f"Views : {views[:23]}",
+            (255, 255, 255),
             font=arial,
         )
-
+        draw.text(
+            (600, 500),
+            f"Duration : {duration[:23]} Mins",
+            (255, 255, 255),
+            font=arial,
+        )
+        draw.text(
+            (600, 550),
+            f"Channel : {channel}",
+            (255, 255, 255),
+            font=arial,
+        )
         try:
-            os.remove(f"cache/thumb{videoid}.png")
+            os.remove(f"queue{videoid}.png")
         except:
             pass
-        file = f"cache/que{videoid}_{user_id}.png"
-        background.save(f"cache/que{videoid}_{user_id}.png")
-        return f"cache/que{videoid}_{user_id}.png"
-    except Exception as e:
-        print(e)
-        return random.choice(YOUTUBE_IMG_URL)
+        background.save(f"qfinal{videoid}.png")
+        return f"qfinal{videoid}.png"
+    except Exception:
+        return YOUTUBE_IMG_URL    
