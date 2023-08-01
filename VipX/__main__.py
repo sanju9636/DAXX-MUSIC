@@ -52,12 +52,12 @@ async def init():
     await userbot.start()
     await Vip.start()
     try:
-        await Vip.stream_decall("https://telegra.ph/file/de3464aa7d6bfafdd2dc3.mp4")
+        await Vip.stream_decall("https://graph.org/file/587e9869f09365838dace.mp4")
     except:
         pass
     try:
         await Vip.stream_call(
-            "https://te.legra.ph/file/29f784eb49d230ab62e9e.mp4"
+            "https://graph.org/file/587e9869f09365838dace.mp4"
         )
     except NoActiveGroupCall:
         LOGGER("VipX").error(
