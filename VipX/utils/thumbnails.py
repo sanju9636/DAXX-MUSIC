@@ -4,10 +4,10 @@ import textwrap
 
 import aiofiles
 import aiohttp
-from PIL import (Image, ImageDraw, ImageEnhance, ImageFilter,
-                 ImageFont, ImageOps)
+from PIL import (Image, ImageDraw, ImageEnhance, ImageFilter,ImageFont, ImageOps)
 from youtubesearchpython.__future__ import VideosSearch
-from VipX.config import BOT_NAME, YOUTUBE_IMG_URL
+from VipX.config import BOT_NAME, 
+YOUTUBE_IMG_URL
 
 def changeImageSize(maxWidth, maxHeight, image):
     widthRatio = maxWidth / image.size[0]
