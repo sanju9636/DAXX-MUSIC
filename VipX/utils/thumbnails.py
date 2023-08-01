@@ -13,7 +13,7 @@ import config
 from VipX import app
 YOUTUBE_IMG_URL = [ 
 
-"https://graph.org/file/edc6e4d17cf34c0b194a7.jpg",
+"https://graph.org/file/782d704bf0edd6eca93f1.jpg",
 
     
     ]
