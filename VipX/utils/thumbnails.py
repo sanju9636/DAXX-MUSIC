@@ -11,7 +11,7 @@ from youtubesearchpython.__future__ import VideosSearch
 
 import config
 from VipX import app
-YOUTUBE_IMG_URL = [ ]
+YOUTUBE_IMG_URL = ["https://graph.org/file/703e54ed41a78e9ae3d79.jpg" ]
 
 
 def changeImageSize(maxWidth, maxHeight, image):
