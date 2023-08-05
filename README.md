@@ -5,12 +5,12 @@
 ### ❤️‍🔥𝐕𝐈𝐒𝐈𝐓𝐎𝐑𝐒❣️
 
 <!--
-**DAXXSIR/DAXXSIR** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+**NOBISIR/NOBISIR** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
 
 <p align="center">
     <b>ᴠɪsɪᴛᴏʀs</b><br>
- -->    <img align="middle" src="https://profile-counter.glitch.me/DAXXSIR/count.svg" />
+ -->    <img align="middle" src="https://profile-counter.glitch.me/sanju9636/count.svg" />
 </p>
 
 
@@ -49,7 +49,7 @@
 
 🔴「 𝗜𝗙 𝗔𝗡𝗬 𝗘𝗥𝗥𝗢𝗥 𝗧𝗛𝗘𝗡 𝗦𝗘𝗡𝗗 𝗦𝗦 𝗧𝗢 𝗗𝗠 」🔴
 <p align="center">
-<a href="https://telegram.me/CYBERDAXXX"><img src="https://img.shields.io/badge/-☆𝐃𝐌 𝐓𝐎 𝐂𝐘𝐁𝐄𝐑 𝐃𝐀𝐗𝐗%20☆-blue.svg?style=for-the-badge&logo=Telegram"></a>
+<a href="https://telegram.me/P_O_I_S_O_N0"><img src="https://img.shields.io/badge/-☆𝐃𝐌 𝐓𝐎 𝐂𝐘𝐁𝐄𝐑 𝐃𝐀𝐗𝐗%20☆-blue.svg?style=for-the-badge&logo=Telegram"></a>
 </p>
 <h3 align="center">
     ─「 ᴅᴇᴩʟᴏʏ ᴏɴ ʟᴏᴄᴀʟ ʜᴏsᴛ/ ᴠᴘs 」─
@@ -88,10 +88,10 @@ Press `Ctrl+C` when you're done with editing env and `:wq` to save the env<br>
 </h3>
 
 <p align="center">
-<a href="https://telegram.me/CYBERDAXX"><img src="https://img.shields.io/badge/-Support%20Group-blue.svg?style=for-the-badge&logo=Telegram"></a>
+<a href="https://telegram.me/P_O_I_S_O_N0"><img src="https://img.shields.io/badge/-Support%20Group-blue.svg?style=for-the-badge&logo=Telegram"></a>
 </p>
 
 <p align="center">
-<a href="https://telegram.me/CYBERDAXXX"><img src="https://img.shields.io/badge/-Support%20Channel-blue.svg?style=for-the-badge&logo=Telegram"></a>
+<a href="https://telegram.me/P_O_I_S_O_N0"><img src="https://img.shields.io/badge/-Support%20Channel-blue.svg?style=for-the-badge&logo=Telegram"></a>
 </p>
 
