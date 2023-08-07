@@ -27,7 +27,7 @@
 </h2>
 <img src="https://readme-typing-svg.herokuapp.com?color=FF0000&width=420&lines=♦𝙳𝙴𝙿𝙻𝙾𝚈+𝙾𝙽+𝙷𝙴𝚁𝙾𝙺𝚄♦;♨️+𝙽𝙾+𝙷𝙴𝚁𝙾𝙺𝚄+𝙱𝙰𝙽+𝙸𝚂𝚂𝚄𝙴+𝙰𝙻𝚂𝙾+𝚅𝙿𝚂+𝙳𝙴𝙿𝙻𝙾𝚈+📍+𝙿𝚁𝙴𝚂𝙴𝙽𝚃;🎭+𝙿𝙾𝚆𝙴𝚁𝙳+𝙱𝚈+𝙉𝙤𝙗𝙞+🎭">
 <p align="center">
-  <img src="[https://telegra.ph/file/74decaa5708a231d0d3e7.jpg](https://telegra.ph/file/74decaa5708a231d0d3e7.jpg)">
+  <img src="[https://telegra.ph/file/74decaa5708a231d0d3e7.jpg]()">
 </p>
 
 **𝙏𝙀𝙎𝙏 𝘽𝙊𝙏 ➣ [𝗕𝗢𝗧❥](https://t.me/P_O_I_S_O_N0)**
