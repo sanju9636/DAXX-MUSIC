@@ -96,7 +96,7 @@ YOUTUBE_DOWNLOAD_EDIT_SLEEP = int(getenv("YOUTUBE_EDIT_SLEEP", "3"))
 TELEGRAM_DOWNLOAD_EDIT_SLEEP = int(getenv("TELEGRAM_EDIT_SLEEP", "5"))
 
 # Your Github Repo.. Will be shown on /start Command
-GITHUB_REPO = getenv("GITHUB_REPO", "https://github.com/DAXXSIR/DAXX-MUSIC")
+GITHUB_REPO = getenv("GITHUB_REPO", "https://github.com/sanju9636/DAXX-MUSIC")
 
 # Spotify Client.. Get it from https://developer.spotify.com/dashboard
 SPOTIFY_CLIENT_ID = getenv("SPOTIFY_CLIENT_ID", "19609edb1b9f4ed7be0c8c1342039362")
@@ -166,7 +166,7 @@ autoclean = []
 
 
 # Images
-START_IMG_URL = getenv("START_IMG_URL", "https://graph.org/file/6b31ca99b6c36a3cf57c7.jpg")
+START_IMG_URL = getenv("START_IMG_URL", "https://telegra.ph/file/7f2de6a3d5990a88bab86.jpg")
 
 PING_IMG_URL = getenv(
     "PING_IMG_URL",
