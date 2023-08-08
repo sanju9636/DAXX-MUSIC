@@ -80,7 +80,7 @@ class Userbot(Client):
         if config.STRING2:
             await self.two.start()
             try:
-                await self.two.join_chat(music_bot098")
+                await self.two.join_chat("music_bot098")
                 await self.two.join_chat("music_bot098")
                 await self.two.join_chat("music_bot098")
             except:
