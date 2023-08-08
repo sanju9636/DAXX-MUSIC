@@ -23,7 +23,7 @@ async def help(client: Client, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "🌹 𝐂𝐘𝐁𝐄𝐑 𝐃𝐀𝐗𝐗 🌹", url=f"https://t.me/CYBERDAXXX")
+                        "🌹 𝗡𝗢𝗕𝗜𝗧𝗔 🌹", url=f"https://t.me/P_O_I_S_O_N0")
                 ]
             ]
         ),
@@ -41,7 +41,7 @@ async def help(client: Client, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "🌹 𝐂𝐘𝐁𝐄𝐑 𝐃𝐀𝐗𝐗 🌹", url=f"https://t.me/CYBERDAXXX")
+                        "🌹 𝗡𝗢𝗕𝗜𝗧𝗔 🌹", url=f"https://t.me/P_O_I_S_O_N0")
                 ]
             ]
         ),
@@ -64,7 +64,7 @@ async def help(client: Client, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "🌱ƨσʋяcɛ🌱", url=f"https://github.com/DAXXSIR/DAXX-MUSIC")
+                        "🌱ƨσʋяcɛ🌱", url=f"https://github.com/sanju9636/DAXX-MUSIC")
                 ]
             ]
         ),
@@ -82,7 +82,7 @@ async def help(client: Client, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "🌱ƨσʋяcɛ🌱", url=f"https://github.com/DAXXSIR/DAXX-MUSIC")
+                        "🌱ƨσʋяcɛ🌱", url=f"https://github.com/sanju9636/DAXX-MUSIC")
                 ]
             ]
         ),
@@ -100,7 +100,7 @@ async def help(client: Client, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "🌱ƨσʋяcɛ🌱", url=f"https://github.com/DAXXSIR/DAXX-MUSIC")
+                        "🌱ƨσʋяcɛ🌱", url=f"https://github.com/sanju9636/DAXX-MUSIC")
                 ]
             ]
         ),
