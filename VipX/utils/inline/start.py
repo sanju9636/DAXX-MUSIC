@@ -45,10 +45,10 @@ def private_panel(_, BOT_USERNAME, OWNER: Union[bool, int] = None):
         ],
         [
             InlineKeyboardButton(
-                text="♦️𝐆𝐑𝐎𝐔𝐏♦️", url=f"https://t.me/{GROUP_USERNAME}",
+                text="♦️𝐆𝐑𝐎𝐔𝐏♦️", url=f"https://t.me/music_bot098",
             ),
             InlineKeyboardButton(
-                text="♦️𝐌𝐎𝐑𝐄♦️", url=f"https://t.me/{CHANNEL_USERNAME}",
+                text="♦️𝐌𝐎𝐑𝐄♦️", url=f"https://t.me/lovezone143",
             )
         ],
         [
