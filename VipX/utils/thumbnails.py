@@ -1,7 +1,7 @@
 import os
 import re
 import textwrap
-import random
+
 import aiofiles
 import aiohttp
 import numpy as np
@@ -9,24 +9,8 @@ import numpy as np
 from PIL import Image, ImageChops, ImageDraw, ImageEnhance, ImageFilter, ImageFont
 from youtubesearchpython.__future__ import VideosSearch
 
-import config
+from config import YOUTUBE_IMG_URL
 from VipX import app
-YOUTUBE_IMG_URL = [ 
-    
-    "https://telegra.ph/file/1c20b4403d5508863452a.jpg",
-    "https://te.legra.ph/file/5ff72b018c76eac9ce375.jpg",
-    "https://te.legra.ph/file/da930b148701e7a0ca8bc.jpg",
-    "https://te.legra.ph/file/f45f7f3bd5ae4d35d4c47.jpg",
-    "https://te.legra.ph/file/378df5c6518eadd4ed5d9.jpg",
-    "https://te.legra.ph/file/28287fa74b777347b3356.jpg",
-    "https://te.legra.ph/file/f2314fa3890db15da9258.jpg",
-    "https://te.legra.ph/file/a3a6ab7ce343cc6ed8193.jpg",
-    "https://te.legra.ph/file/3eb18e6bd58ad72c5f7cc.jpg",
-    "https://te.legra.ph/file/354081302febe56778427.jpg",
-    "https://te.legra.ph/file/23c0731f988724ec41648.jpg",
-    "https://te.legra.ph/file/228c59fa29597e58904df.jpg",
-    "https://te.legra.ph/file/3a6622c60a2c13aa08e43.jpg",
-]
 
 
 def changeImageSize(maxWidth, maxHeight, image):
@@ -42,10 +26,10 @@ def add_corners(im):
     bigsize = (im.size[0] * 3, im.size[1] * 3)
     mask = Image.new("L", bigsize, 0)
     ImageDraw.Draw(mask).ellipse((0, 0) + bigsize, fill=255)
-    mask = mask.resize(im.size, Image.ANTIALIAS)
+    mask = mask.resize(im.size, Image.LANCZOS)
     mask = ImageChops.darker(mask, im.split()[-1])
     im.putalpha(mask)
-
+    
 
 async def gen_thumb(videoid, user_id):
     if os.path.isfile(f"cache/{videoid}_{user_id}.png"):
@@ -95,7 +79,7 @@ async def gen_thumb(videoid, user_id):
         d = np.array(a)
         e = np.dstack((c, d))
         f = Image.fromarray(e)
-        x = f.resize((107, 107))
+        x = f.resize((307, 307))
 
         youtube = Image.open(f"cache/thumb{videoid}.png")
         bg = Image.open(f"VipX/assets/vipx.png")
@@ -116,7 +100,7 @@ async def gen_thumb(videoid, user_id):
         x2 = Xcenter + 250
         y2 = Ycenter + 250
         logo = youtube.crop((x1, y1, x2, y2))
-        logo.thumbnail((520, 520), Image.ANTIALIAS)
+        logo.thumbnail((520, 520), Image.LANCZOS)
         logo.save(f"cache/chop{videoid}.png")
         if not os.path.isfile(f"cache/cropped{videoid}.png"):
             im = Image.open(f"cache/chop{videoid}.png").convert("RGBA")
@@ -125,57 +109,61 @@ async def gen_thumb(videoid, user_id):
 
         crop_img = Image.open(f"cache/cropped{videoid}.png")
         logo = crop_img.convert("RGBA")
-        logo.thumbnail((365, 365), Image.ANTIALIAS)
-        width = int((1280 - 365) / 2)
+        logo.thumbnail((370, 400), Image.LANCZOS)
+        width = int((1280 - 400) / 20)
         background = Image.open(f"cache/temp{videoid}.png")
-        background.paste(logo, (width + 2, 138), mask=logo)
-        background.paste(x, (710, 427), mask=x)
+        background.paste(logo, (width + 1, 40), mask=logo)
+        background.paste(x, (53, 365), mask=x)
         background.paste(image3, (0, 0), mask=image3)
 
         draw = ImageDraw.Draw(background)
-        font = ImageFont.truetype("VipX/assets/font2.ttf", 45)
-        ImageFont.truetype("VipX/assets/font2.ttf", 70)
-        arial = ImageFont.truetype("VipX/assets/font2.ttf", 30)
+        font = ImageFont.truetype("VipX/assets/font2.ttf", 50)
+        ImageFont.truetype("VipX/assets/font2.ttf", 30)
+        arial = ImageFont.truetype("VipX/assets/font2.ttf", 45)
         ImageFont.truetype("VipX/assets/font.ttf", 30)
-        para = textwrap.wrap(title, width=32)
+        name_font = ImageFont.truetype("VipX/assets/font.ttf", 30)
+        para = textwrap.wrap(title, width=30)
         try:
             draw.text(
-                (450, 25),
-                f"STARTED PLAYING",
-                fill="white",
-                stroke_width=3,
-                stroke_fill="grey",
+                (590, 80),
+                f"Playing Now Baby...",
+                fill="red",
+                stroke_width=1,
+                stroke_fill="red",
                 font=font,
             )
             if para[0]:
                 text_w, text_h = draw.textsize(f"{para[0]}", font=font)
                 draw.text(
-                    ((1280 - text_w) / 2, 530),
+                    ((1280 - text_w) / 1.2, 155),
                     f"{para[0]}",
                     fill="white",
                     stroke_width=1,
-                    stroke_fill="white",
+                    stroke_fill="blue",
                     font=font,
                 )
             if para[1]:
                 text_w, text_h = draw.textsize(f"{para[1]}", font=font)
                 draw.text(
-                    ((1280 - text_w) / 2, 580),
+                    ((1280 - text_w) / 1, 600200),
                     f"{para[1]}",
                     fill="white",
                     stroke_width=1,
-                    stroke_fill="white",
+                    stroke_fill="red",
                     font=font,
                 )
         except:
             pass
         text_w, text_h = draw.textsize(f"Duration: {duration} Mins", font=arial)
         draw.text(
-            ((1280 - text_w) / 2, 660),
-            f"Duration: {duration} Mins",
-            fill="white",
+            ((1280 - text_w) / 1.5, 235),
+            f"Duration:- {duration} Minutes",
+            fill="green",
+            stroke_width=1,
+            stroke_fill="green",
             font=arial,
-        )
+         )
+       
         try:
             os.remove(f"cache/thumb{videoid}.png")
         except:
@@ -184,7 +172,7 @@ async def gen_thumb(videoid, user_id):
         return f"cache/{videoid}_{user_id}.png"
     except Exception as e:
         print(e)
-        return random.choice(YOUTUBE_IMG_URL)
+        return YOUTUBE_IMG_URL
 
 
 async def gen_qthumb(videoid, user_id):
@@ -199,7 +187,7 @@ async def gen_qthumb(videoid, user_id):
                 title = re.sub("\W+", " ", title)
                 title = title.title()
             except:
-                title = "Unsupported Title"
+               title = "Unsupported Title"
             try:
                 duration = result["duration"]
             except:
@@ -235,7 +223,7 @@ async def gen_qthumb(videoid, user_id):
         d = np.array(a)
         e = np.dstack((c, d))
         f = Image.fromarray(e)
-        x = f.resize((107, 107))
+        x = f.resize((307, 307))
 
         youtube = Image.open(f"cache/thumb{videoid}.png")
         bg = Image.open(f"VipX/assets/vipx.png")
@@ -256,7 +244,7 @@ async def gen_qthumb(videoid, user_id):
         x2 = Xcenter + 250
         y2 = Ycenter + 250
         logo = youtube.crop((x1, y1, x2, y2))
-        logo.thumbnail((520, 520), Image.ANTIALIAS)
+        logo.thumbnail((520, 520), Image.LANCZOS)
         logo.save(f"cache/chop{videoid}.png")
         if not os.path.isfile(f"cache/cropped{videoid}.png"):
             im = Image.open(f"cache/chop{videoid}.png").convert("RGBA")
@@ -265,55 +253,57 @@ async def gen_qthumb(videoid, user_id):
 
         crop_img = Image.open(f"cache/cropped{videoid}.png")
         logo = crop_img.convert("RGBA")
-        logo.thumbnail((365, 365), Image.ANTIALIAS)
-        width = int((1280 - 365) / 2)
+        logo.thumbnail((370, 400), Image.LANCZOS)
+        width = int((1280 - 400) / 20)
         background = Image.open(f"cache/temp{videoid}.png")
-        background.paste(logo, (width + 2, 138), mask=logo)
-        background.paste(x, (710, 427), mask=x)
+        background.paste(logo, (width + 1, 40), mask=logo)
+        background.paste(x, (53, 365), mask=x)
         background.paste(image3, (0, 0), mask=image3)
 
         draw = ImageDraw.Draw(background)
-        font = ImageFont.truetype("VipX/assets/font2.ttf", 45)
-        ImageFont.truetype("VipX/assets/font2.ttf", 70)
-        arial = ImageFont.truetype("VipX/assets/font2.ttf", 30)
+        font = ImageFont.truetype("VipX/assets/font2.ttf", 50)
+        ImageFont.truetype("VipX/assets/font2.ttf", 30)
+        arial = ImageFont.truetype("VipX/assets/font2.ttf", 45)
         ImageFont.truetype("VipX/assets/font.ttf", 30)
-        para = textwrap.wrap(title, width=32)
+        para = textwrap.wrap(title, width=30)
         try:
             draw.text(
-                (455, 25),
-                "ADDED TO QUEUE",
-                fill="white",
-                stroke_width=5,
-                stroke_fill="black",
+                (590, 80),
+                f"Next Song Baby...",
+                fill="red",
+                stroke_width=1,
+                stroke_fill="red",
                 font=font,
             )
             if para[0]:
                 text_w, text_h = draw.textsize(f"{para[0]}", font=font)
                 draw.text(
-                    ((1280 - text_w) / 2, 530),
+                    ((1280 - text_w) / 1.2, 155),
                     f"{para[0]}",
                     fill="white",
                     stroke_width=1,
-                    stroke_fill="white",
+                    stroke_fill="blue",
                     font=font,
                 )
             if para[1]:
                 text_w, text_h = draw.textsize(f"{para[1]}", font=font)
                 draw.text(
-                    ((1280 - text_w) / 2, 580),
+                    ((1280 - text_w) / 1, 620000),
                     f"{para[1]}",
                     fill="white",
                     stroke_width=1,
-                    stroke_fill="white",
+                    stroke_fill="red",
                     font=font,
-                )
+        )
         except:
             pass
         text_w, text_h = draw.textsize(f"Duration: {duration} Mins", font=arial)
         draw.text(
-            ((1280 - text_w) / 2, 660),
-            f"Duration: {duration} Mins",
-            fill="white",
+            ((1280 - text_w) / 1.5, 235),
+            f"Duration:- {duration} Minutes",
+            fill="green",
+            stroke_width=1,
+            stroke_fill="green",
             font=arial,
         )
 
@@ -326,4 +316,5 @@ async def gen_qthumb(videoid, user_id):
         return f"cache/que{videoid}_{user_id}.png"
     except Exception as e:
         print(e)
-        return random.choice(YOUTUBE_IMG_URL)
+        return YOUTUBE_IMG_URL
+        
